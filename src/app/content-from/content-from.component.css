@@ -1,0 +1,29 @@
+nz-dropdown-button, nz-dropdown {
+  float: left;
+  margin: 2px;
+}
+
+nz-dropdown::after {
+  content: '';
+  clear: both;
+}
+
+.square {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+.headerCenter {
+  vertical-align: middle;
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
+
+
+
+
+

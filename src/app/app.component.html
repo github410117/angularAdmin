@@ -1,25 +1,6 @@
-<nz-layout>
+<nz-layout style="height: 100%;">
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-    <div class="logo">
-    </div>
-    <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
-      <li nz-submenu>
-        <span title><i class="anticon anticon-user"></i><span class="nav-text">User</span></span>
-        <ul>
-          <li nz-menu-item>Tom</li>
-          <li nz-menu-item>Bill</li>
-          <li nz-menu-item>Alex</li>
-        </ul>
-      </li>
-      <li nz-submenu>
-        <span title><i class="anticon anticon-team"></i><span class="nav-text">Team</span></span>
-        <ul>
-          <li nz-menu-item>Team 1</li>
-          <li nz-menu-item>Team 2</li>
-        </ul>
-      </li>
-      <li nz-menu-item><span><i class="anticon anticon-file"></i><span class="nav-text">File</span></span></li>
-    </ul>
+   <app-sider></app-sider>
   </nz-sider>
   <nz-layout>
     <nz-header style="background: #fff; padding:0;">
@@ -30,9 +11,11 @@
         <nz-breadcrumb-item>User</nz-breadcrumb-item>
         <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
       </nz-breadcrumb>
-      <div style="padding:24px; background: #fff; min-height: 360px;">
-        Bill is a cat.
-      </div>
+      <router-outlet></router-outlet>
+      <!--<app-content-from style="background-color: red"></app-content-from>-->
+      <!--<div style="padding:24px; background: #fff; min-height: 360px;">-->
+        <!--Bill is a cat.-->
+      <!--</div>-->
     </nz-content>
     <nz-footer style="text-align: center;">Ant Design ©2017 Implement By Angular</nz-footer>
   </nz-layout>

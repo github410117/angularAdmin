@@ -1,0 +1,55 @@
+<div style="margin-bottom: 16px;">
+  <button nz-button [disabled]="_disabledButton" [nzType]="'primary'" [nzLoading]="_operating" (click)="_operateData()">Operating</button>
+  <span style="margin-left: 8px;" *ngIf="_checkedNumber">Selected {{_checkedNumber}} items</span>
+</div>
+<nz-table #nzTable [nzDataSource]="_dataSet" [nzPageSize]="10" (nzDataChange)="_displayDataChange($event)" (nzPageIndexChange)="_refreshStatus()" (nzPageSizeChange)="_refreshStatus()">
+  <thead nz-thead>
+  <tr>
+    <th nz-th [nzCheckbox]="true">
+      <label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="_checkAll($event)">
+      </label>
+    </th>
+    <th class="headerCenter" nz-th *ngFor="let col of _columnData"><span>{{col}}</span></th>
+  </tr>
+  </thead>
+  <tbody nz-tbody>
+  <!--<tr nz-tbody-tr *ngFor="let data of nzTable.data">-->
+  <tr nz-tbody-tr *ngFor="let data of _dataSet">
+    <td nz-td [nzCheckbox]="true">
+      <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event)">
+      </label>
+    </td>
+    <td nz-td>{{data.uid}}</td>
+    <td nz-td>{{data.realName}}</td>
+    <td nz-td>{{data.phone}}</td>
+    <td nz-td>{{data.nickName}}</td>
+    <td nz-td>{{data.state}}</td>
+    <td nz-td>
+        <span [style.backgroundColor]="data.isProxy == '是' ? 'red' : 'blue'" class="square" class="label label-info">{{data.isProxy}}</span>
+    </td>
+    <td nz-td>{{data.role}}</td>
+    <td nz-td>{{data.registerTime}}</td>
+    <td nz-td>
+      <div style="height: 28px;">
+        <nz-dropdown-button (nzClick)="log($event)">
+          操作
+          <ul nz-menu>
+            <li nz-menu-item>
+              <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">设置代理商</a>
+            </li>
+            <li nz-menu-item>
+              <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">设置角色</a>
+            </li>
+            <li nz-menu-item>
+              <a rel="noopener noreferrer" (click)="edit(data)">编辑</a>
+            </li>
+            <li nz-menu-item>
+              <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">重设密码</a>
+            </li>
+          </ul>
+        </nz-dropdown-button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

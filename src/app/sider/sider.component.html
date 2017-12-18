@@ -1,0 +1,10 @@
+<div class="logo">
+</div>
+<ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
+  <li nz-submenu *ngFor="let item of siderMenuArray;let i = index">
+    <span title><i class="anticon anticon-user"></i><span class="nav-text">{{item}}</span></span>
+    <ul>
+      <li nz-menu-item *ngFor="let childitem of siderChildArray[i]" (click)="liClick(childitem)">{{childitem}}</li>
+    </ul>
+  </li>
+</ul>
