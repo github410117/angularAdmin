@@ -69,13 +69,13 @@ export class ContentFromComponent implements OnInit {
     this.activeRoute.params.subscribe(() => this.loadData());
   }
 
-  // log(e) {
-  //   console.log('click dropdown button');
-  // }
+  log(e) {
+    console.log('click dropdown button');
+  }
 
   public loadData(){
     // this.contentservice.getUserList();
-    return this.contentservice.getUserList().subscribe(
+    this.contentservice.getUserList().subscribe(
       res => {
         this.userInfoList = res;
         console.log(res);
@@ -85,9 +85,9 @@ export class ContentFromComponent implements OnInit {
     );
   }
 
-  // edit(data: UserInfo) {
-  //   this.router.navigateByUrl('/content/' + data.uid)
-  // }
+  edit() {
+    // this.router.navigateByUrl('/content/' + data.uid)
+  }
 
 }
 

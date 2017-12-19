@@ -14,6 +14,7 @@ export class SiderComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit() {
+
     this.siderMenuArray = ["主页", "用户模块", "代理商模块", "资讯模块", "通道模块", "财务模块", "系统设置"];
     this.siderChildArray = [
       [],
