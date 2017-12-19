@@ -11,6 +11,8 @@ import {Router} from '@angular/router';
 import {RoutesModule} from './routes.module';
 import { ChangeFormComponent } from './content-from/change-form/change-form.component';
 import { ContentChangeService } from './content-from/service/content-change.service';
+import {HttpClientModule} from '@angular/common/http';
+import {ContentInfoService} from './content-from/service/content-info.service';
 
 // const routeConfig: Router = [
 //   {path: '', component: ContentFromComponent}
@@ -27,12 +29,13 @@ import { ContentChangeService } from './content-from/service/content-change.serv
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
     RoutesModule,
   ],
   bootstrap: [AppComponent],
-  providers: [ContentChangeService]
+  providers: [ContentChangeService, ContentInfoService]
 })
 export class AppModule { }

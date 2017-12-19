@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ContentChangeService, UserInfo} from './service/content-change.service';
+import {ContentChangeService} from './service/content-change.service';
+import {FormControl} from '@angular/forms';
+import {User} from './model/user-model';
+import {ContentInfoService} from './service/content-info.service';
 
 @Component({
   selector: 'app-content-from',
@@ -16,6 +19,10 @@ export class ContentFromComponent implements OnInit {
   _operating = false;
   _dataSet = [];
   _indeterminate = false;
+
+  public userInfoList:Array<User>;
+
+  private userinfoArray: FormControl = new FormControl();
 
   _displayDataChange($event) {
     this._displayData = $event;
@@ -50,24 +57,37 @@ export class ContentFromComponent implements OnInit {
 
   _columnData: Array<string>;
 
-  constructor(public router: Router, private contentService: ContentChangeService) { }
+  constructor(public router: Router, public activeRoute: ActivatedRoute, private contentchangeService: ContentChangeService, private contentservice: ContentInfoService) { }
 
   ngOnInit() {
 
-    this._dataSet = this.contentService.getinfos();
+    // this._dataSet = this.contentService.getinfos();
+    // this.contentService.userinfos.subscribe(success => this.userinfoArray = success);
 
-    this._columnData = ["Uid", "实名认证", "手机号", "昵称", "状态", "是否为代理商", "用户角色", "注册时间", "操作"];
+    this._columnData = ["Uid", "标题", "内容", "作者", "操作"];
 
-    console.log(this._dataSet);
+    this.activeRoute.params.subscribe(() => this.loadData());
   }
 
-  log(e) {
-    console.log('click dropdown button');
+  // log(e) {
+  //   console.log('click dropdown button');
+  // }
+
+  public loadData(){
+    // this.contentservice.getUserList();
+    return this.contentservice.getUserList().subscribe(
+      res => {
+        this.userInfoList = res;
+        console.log(res);
+      },
+      error =>{console.log(error)},
+      ()=>{}
+    );
   }
 
-  edit(data: UserInfo) {
-    this.router.navigateByUrl('/content/' + data.uid)
-  }
+  // edit(data: UserInfo) {
+  //   this.router.navigateByUrl('/content/' + data.uid)
+  // }
 
 }
 

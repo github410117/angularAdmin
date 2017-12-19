@@ -14,21 +14,21 @@
   </thead>
   <tbody nz-tbody>
   <!--<tr nz-tbody-tr *ngFor="let data of nzTable.data">-->
-  <tr nz-tbody-tr *ngFor="let data of _dataSet">
+  <!--<tr nz-tbody-tr *ngFor="let data of _dataSet">-->
+  <tr nz-tbody-tr *ngFor="let data of userInfoList">
     <td nz-td [nzCheckbox]="true">
       <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event)">
       </label>
     </td>
-    <td nz-td>{{data.uid}}</td>
-    <td nz-td>{{data.realName}}</td>
-    <td nz-td>{{data.phone}}</td>
-    <td nz-td>{{data.nickName}}</td>
-    <td nz-td>{{data.state}}</td>
-    <td nz-td>
-        <span [style.backgroundColor]="data.isProxy == '是' ? 'red' : 'blue'" class="square" class="label label-info">{{data.isProxy}}</span>
-    </td>
-    <td nz-td>{{data.role}}</td>
-    <td nz-td>{{data.registerTime}}</td>
+    <td nz-td>{{data.id}}</td>
+    <td nz-td>{{data.title}}</td>
+    <td nz-td>{{data.content}}</td>
+    <td nz-td>{{data.author}}</td>
+    <!--<td nz-td>-->
+        <!--<span [style.backgroundColor]="data.isProxy == '是' ? 'red' : 'blue'" class="square" class="label label-info">{{data.isProxy}}</span>-->
+    <!--</td>-->
+    <!--<td nz-td>{{data.role}}</td>-->
+    <!--<td nz-td>{{data.registerTime}}</td>-->
     <td nz-td>
       <div style="height: 28px;">
         <nz-dropdown-button (nzClick)="log($event)">

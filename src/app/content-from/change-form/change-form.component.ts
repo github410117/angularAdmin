@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ContentChangeService, UserInfo} from '../service/content-change.service';
+import {ContentChangeService} from '../service/content-change.service';
 import {
   FormBuilder,
   FormGroup,
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ChangeFormComponent implements OnInit {
 
-  info: UserInfo;
+  // info: UserInfo;
 
 
   validateForm: FormGroup;
@@ -67,9 +67,9 @@ export class ChangeFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    let uid = this.routerInfo.snapshot.params['id'];
-    this.info = this.changeService.getinfo(uid);
-    console.log(this.info);
+    // let uid = this.routerInfo.snapshot.params['id'];
+    // this.info = this.changeService.getinfo(uid);
+    // console.log(this.info);
   }
 
 }
