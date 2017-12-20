@@ -14,12 +14,13 @@ nz-dropdown::after {
   text-align: center;
   vertical-align: middle;
 }
-.headerCenter {
+.headerCenter{
   vertical-align: middle;
   text-align: center;
 }
 
 td {
+  vertical-align: middle;
   text-align: center;
 }
 

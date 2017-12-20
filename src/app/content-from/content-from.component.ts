@@ -17,14 +17,16 @@ export class ContentFromComponent implements OnInit {
   _checkedNumber = 0;
   _displayData: Array<any> = [];
   _operating = false;
-  _dataSet = [];
+  // _dataSet = [];
   _indeterminate = false;
+  tableLoading = true;
+  pagenum = 10;
+  _dataSet =[];
 
-  public userInfoList:Array<User>;
-
-  private userinfoArray: FormControl = new FormControl();
+  // private userinfoArray: FormControl = new FormControl();
 
   _displayDataChange($event) {
+    console.log($event);
     this._displayData = $event;
   };
 
@@ -77,8 +79,8 @@ export class ContentFromComponent implements OnInit {
     // this.contentservice.getUserList();
     this.contentservice.getUserList().subscribe(
       res => {
-        this.userInfoList = res;
-        console.log(res);
+        this._dataSet = res;
+        this.tableLoading = false;
       },
       error =>{console.log(error)},
       ()=>{}
