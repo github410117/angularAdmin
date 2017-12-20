@@ -1,7 +1,7 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
   <div nz-form-item nz-row>
     <div nz-form-label nz-col [nzSpan]="7">
-      <label nz-form-item-required>真实姓名</label>
+      <label nz-form-item-required>Uid</label>
     </div>
     <div nz-col [nzSpan]="12" nz-form-control [nzValidateStatus]="getFormControl('realName')" nzHasFeedback>
       <nz-input formControlName="realName" [nzType]="'text'" [nzPlaceHolder]="'请输入要修改的真实姓名'" [nzSize]="'large'">
@@ -11,7 +11,7 @@
   </div>
   <div nz-form-item nz-row>
     <div nz-form-label nz-col [nzSpan]="7">
-      <label nz-form-item-required>手机号</label>
+      <label nz-form-item-required>标题</label>
     </div>
     <div nz-col [nzSpan]="12" nz-form-control [nzValidateStatus]="getFormControl('phone')" nzHasFeedback>
       <nz-input formControlName="phone" [nzPlaceHolder]="'请输入手机号码'" [nzType]="'phone'" [nzSize]="'large'">
@@ -22,7 +22,16 @@
   </div>
   <div nz-form-item nz-row>
     <div nz-form-label nz-col [nzSpan]="7">
-      <label nz-form-item-required>昵称</label>
+      <label nz-form-item-required>内容</label>
+    </div>
+    <div nz-col [nzSpan]="12" nz-form-control [nzValidateStatus]="getFormControl('nickName')" nzHasFeedback>
+      <nz-input formControlName="nickName" [nzSize]="'large'" [nzPlaceHolder]="'请输入昵称'" [nzType]="'nickName'"></nz-input>
+      <div nz-form-explain *ngIf="getFormControl('nickName').dirty&&getFormControl('nickName').hasError('required')">昵称不能为空!</div>
+    </div>
+  </div>
+  <div nz-form-item nz-row>
+    <div nz-form-label nz-col [nzSpan]="7">
+      <label nz-form-item-required>作者</label>
     </div>
     <div nz-col [nzSpan]="12" nz-form-control [nzValidateStatus]="getFormControl('nickName')" nzHasFeedback>
       <nz-input formControlName="nickName" [nzSize]="'large'" [nzPlaceHolder]="'请输入昵称'" [nzType]="'nickName'"></nz-input>

@@ -25,7 +25,8 @@ export class SiderComponent implements OnInit {
         name: "用户模块",
         child: [
           {
-            name: "用户列表"
+            name: "用户列表",
+            route: 'content'
           },
           {
             name: "类型管理"
@@ -138,14 +139,8 @@ export class SiderComponent implements OnInit {
   }
 
   liClick(str: string) {
-    switch (str) {
-      case "代理商管理":
-        this.router.navigateByUrl('/content');
-        break;
-      default:
-
-
-    }
+        console.log(str);
+        this.router.navigateByUrl('/' + str);
   }
 
 }

@@ -1,92 +1,69 @@
-<!--<div style="margin-bottom: 16px;">-->
-  <!--<button nz-button [disabled]="_disabledButton" [nzType]="'primary'" [nzLoading]="_operating" (click)="_operateData()">Operating</button>-->
-  <!--<span style="margin-left: 8px;" *ngIf="_checkedNumber">Selected {{_checkedNumber}} items</span>-->
-<!--</div>-->
-<!--<nz-table #nzTable [nzAjaxData]="_dataSet"-->
-          <!--[nzPageSize]="pagenum"-->
-          <!--[nzPageIndex]="1"-->
-          <!--[nzTotal]="_dataSet.length"-->
-          <!--(nzDataChange)="_displayDataChange($event)"-->
-          <!--(nzPageIndexChange)="_refreshStatus()"-->
-          <!--(nzPageSizeChange)="_refreshStatus()"-->
-          <!--[nzLoading]="tableLoading"-->
-          <!--[nzIsPagination]="true"-->
-          <!--&gt;-->
-  <!--<thead nz-thead>-->
-  <!--<tr>-->
-    <!--<th nz-th [nzCheckbox]="true">-->
-      <!--<label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="_checkAll($event)">-->
-      <!--</label>-->
-    <!--</th>-->
-    <!--<th class="headerCenter" nz-th *ngFor="let col of _columnData"><span>{{col}}</span></th>-->
-  <!--</tr>-->
-  <!--</thead>-->
-  <!--<tbody nz-tbody>-->
-  <!--&lt;!&ndash;<tr nz-tbody-tr *ngFor="let data of nzTable.data">&ndash;&gt;-->
-  <!--&lt;!&ndash;<tr nz-tbody-tr *ngFor="let data of _dataSet">&ndash;&gt;-->
-  <!--<tr nz-tbody-tr *ngFor="let data of nzTable.data">-->
-    <!--<td nz-td [nzCheckbox]="true">-->
-      <!--<label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event)">-->
-      <!--</label>-->
-    <!--</td>-->
-    <!--<td nz-td>{{data.id}}</td>-->
-    <!--<td nz-td>{{data.title}}</td>-->
-    <!--<td nz-td>{{data.content}}</td>-->
-    <!--<td nz-td>{{data.author}}</td>-->
-    <!--&lt;!&ndash;<td nz-td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<span [style.backgroundColor]="data.isProxy == '是' ? 'red' : 'blue'" class="square" class="label label-info">{{data.isProxy}}</span>&ndash;&gt;-->
-    <!--&lt;!&ndash;</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;<td nz-td>{{data.role}}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;<td nz-td>{{data.registerTime}}</td>&ndash;&gt;-->
-    <!--<td nz-td>-->
-      <!--<div style="height: 28px; text-align: center" >-->
-        <!--<nz-dropdown-button style="float: none">-->
-          <!--操作-->
-          <!--<ul nz-menu>-->
-            <!--<li nz-menu-item>-->
-              <!--<a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">设置代理商</a>-->
-            <!--</li>-->
-            <!--<li nz-menu-item>-->
-              <!--<a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">设置角色</a>-->
-            <!--</li>-->
-            <!--<li nz-menu-item>-->
-              <!--<a rel="noopener noreferrer" (click)="edit(data)">编辑</a>-->
-            <!--</li>-->
-            <!--<li nz-menu-item>-->
-              <!--<a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">重设密码</a>-->
-            <!--</li>-->
-          <!--</ul>-->
-        <!--</nz-dropdown-button>-->
-      <!--</div>-->
-    <!--</td>-->
-  <!--</tr>-->
-  <!--</tbody>-->
-<!--</nz-table>-->
 <div style="margin-bottom: 16px;">
   <button nz-button [disabled]="_disabledButton" [nzType]="'primary'" [nzLoading]="_operating" (click)="_operateData()">Operating</button>
   <span style="margin-left: 8px;" *ngIf="_checkedNumber">Selected {{_checkedNumber}} items</span>
 </div>
-<nz-table #nzTable [nzAjaxData]="_dataSet" [nzPageSize]="10" (nzDataChange)="_displayDataChange($event)" (nzPageIndexChange)="_refreshStatus()" (nzPageSizeChange)="_refreshStatus()">
+<nz-table #nzTable [nzDataSource]="_dataSet"
+          [nzPageSize]="pagenum"
+          [nzPageIndex]="1"
+          [nzTotal]="_dataSet.length"
+          (nzDataChange)="_displayDataChange($event)"
+          (nzPageIndexChange)="_refreshStatus()"
+          (nzPageSizeChange)="_refreshStatus()"
+          [nzLoading]="tableLoading"
+          [nzIsPagination]="true"
+          >
   <thead nz-thead>
   <tr>
-    <th nz-th nzCheckbox>
+    <th nz-th [nzCheckbox]="true">
       <label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="_checkAll($event)">
       </label>
     </th>
-    <th nz-th><span>Name</span></th>
-    <th nz-th><span>Age</span></th>
-    <th nz-th><span>Address</span></th>
+    <th class="headerCenter" nz-th *ngFor="let col of _columnData"><span>{{col}}</span></th>
   </tr>
   </thead>
   <tbody nz-tbody>
+  <!--<tr nz-tbody-tr *ngFor="let data of nzTable.data">-->
+  <!--<tr nz-tbody-tr *ngFor="let data of _dataSet">-->
   <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-    <td nz-td nzCheckbox>
+    <td nz-td [nzCheckbox]="true">
       <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event)">
       </label>
     </td>
     <td nz-td>{{data.id}}</td>
     <td nz-td>{{data.title}}</td>
+    <td nz-td>{{data.content}}</td>
     <td nz-td>{{data.author}}</td>
+    <!--<td nz-td>-->
+        <!--<span [style.backgroundColor]="data.isProxy == '是' ? 'red' : 'blue'" class="square" class="label label-info">{{data.isProxy}}</span>-->
+    <!--</td>-->
+    <!--<td nz-td>{{data.role}}</td>-->
+    <!--<td nz-td>{{data.registerTime}}</td>-->
+    <td nz-td>
+      <div style="height: 28px; text-align: center" >
+        <nz-dropdown-button style="float: none">
+          操作
+          <ul nz-menu>
+            <li nz-menu-item>
+              <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">设置代理商</a>
+            </li>
+            <li nz-menu-item>
+              <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">设置角色</a>
+            </li>
+            <li nz-menu-item>
+              <a rel="noopener noreferrer" (click)="edit(data)">编辑</a>
+            </li>
+            <li nz-menu-item>
+              <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">重设密码</a>
+            </li>
+          </ul>
+        </nz-dropdown-button>
+      </div>
+    </td>
   </tr>
   </tbody>
 </nz-table>
+<nz-modal [nzVisible]="isVisible" [nzTitle]="'编辑'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" [nzConfirmLoading]="isConfirmLoading">
+  <ng-template #modalContent>
+    
+  </ng-template>
+</nz-modal>

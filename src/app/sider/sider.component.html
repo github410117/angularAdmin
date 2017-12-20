@@ -16,7 +16,7 @@
   <li nz-submenu *ngFor="let item of siderData;let i = index">
     <span title><i class="anticon anticon-user"></i><span class="nav-text">{{item.name}}</span></span>
     <ul>
-      <li nz-menu-item *ngFor="let childitem of item.child" (click)="liClick(childitem)">{{childitem.name}}</li>
+      <li nz-menu-item *ngFor="let childitem of item.child" (click)="liClick(childitem.route)">{{childitem.name}}</li>
     </ul>
   </li>
 </ul>
