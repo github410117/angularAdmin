@@ -67,7 +67,9 @@ export class ChangeFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    // let uid = this.routerInfo.snapshot.params['id'];
+    let uid = this.routerInfo.snapshot.params['id'];
+    let res = this.changeService.getinfo(uid);
+    console.log(res);
     // this.info = this.changeService.getinfo(uid);
     // console.log(this.info);
   }

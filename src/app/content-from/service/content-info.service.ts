@@ -15,7 +15,7 @@ export class ContentInfoService {
   public getUserList():Observable<any>{
     console.log('来了');
     // TODO 查询HttpClient
-    return this.http.post('http://localhost:81/api/infos',null).map(res => res.json());
+    return this.http.get('http://localhost:81/api/infos',null).map(res => res.json());
       // .subscribe(ress => console.log(ress));
   }
 // .map((res: Response) => {
