@@ -91,22 +91,10 @@ export class ContentFromComponent implements OnInit {
   }
 
   edit(data:any) {
-    this.isVisible = true;
-    // console.log(data);
-    // this.router.navigateByUrl('/content/' + data.uid)
+    this.router.navigateByUrl('/content/' + data.uid)
   }
 
-  handleOk = (e) => {
-    this.isConfirmLoading = true;
-    setTimeout(() => {
-      this.isVisible = false;
-      this.isConfirmLoading = false;
-    }, 3000);
-  }
 
-  handleCancel = (e) => {
-    this.isVisible = false;
-  }
 }
 
 
