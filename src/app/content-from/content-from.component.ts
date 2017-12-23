@@ -23,6 +23,8 @@ export class ContentFromComponent implements OnInit {
   pagenum = 10;
   _dataSet =[];
 
+  dataTotal: number;
+
   isVisible = false;
   isConfirmLoading = false;
 
@@ -34,12 +36,13 @@ export class ContentFromComponent implements OnInit {
   };
 
   _refreshStatus() {
-    const allChecked = this._displayData.every(value => value.checked === true);
-    const allUnChecked = this._displayData.every(value => !value.checked);
-    this._allChecked = allChecked;
-    this._indeterminate = (!allChecked) && (!allUnChecked);
-    this._disabledButton = !this._dataSet.some(value => value.checked);
-    this._checkedNumber = this._dataSet.filter(value => value.checked).length;
+    alert('刷新了')
+    // const allChecked = this._displayData.every(value => value.checked === true);
+    // const allUnChecked = this._displayData.every(value => !value.checked);
+    // this._allChecked = allChecked;
+    // this._indeterminate = (!allChecked) && (!allUnChecked);
+    // this._disabledButton = !this._dataSet.some(value => value.checked);
+    // this._checkedNumber = this._dataSet.filter(value => value.checked).length;
   };
 
   _checkAll(value) {
@@ -82,8 +85,10 @@ export class ContentFromComponent implements OnInit {
     // this.contentservice.getUserList();
     this.contentservice.getUserList().subscribe(
       res => {
-        this._dataSet = res;
+        console.log(res);
+        this._dataSet = res.data;
         this.tableLoading = false;
+        this.dataTotal = res.total;
       },
       error =>{console.log(error)},
       ()=>{}
@@ -91,7 +96,7 @@ export class ContentFromComponent implements OnInit {
   }
 
   edit(data:any) {
-    this.router.navigateByUrl('/content/' + data.uid)
+    this.router.navigateByUrl('/content/' + data.id)
   }
 
 

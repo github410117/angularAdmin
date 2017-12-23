@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -8,7 +8,10 @@ import {Router} from '@angular/router';
 })
 export class SiderComponent implements OnInit {
 
-  siderData;//sider数据
+  siderData:any[];//sider数据
+
+  @Input()
+  isCollapsed:false;
 
   constructor(public router: Router) { }
 

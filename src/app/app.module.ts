@@ -13,6 +13,9 @@ import { ChangeFormComponent } from './content-from/change-form/change-form.comp
 import { ContentChangeService } from './content-from/service/content-change.service';
 import {HttpClientModule} from '@angular/common/http';
 import {ContentInfoService} from './content-from/service/content-info.service';
+import {environment} from '../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 // const routeConfig: Router = [
 //   {path: '', component: ContentFromComponent}

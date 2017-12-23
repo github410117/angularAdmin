@@ -1,24 +1,24 @@
-:host ::ng-deep .logo {
+.logo {
   height: 32px;
   background: #333;
   border-radius: 6px;
   margin: 16px;
 }
 
-:host ::ng-deep .ant-layout-sider-collapsed .nav-text {
+.ant-layout-sider-collapsed .nav-text {
   display: none;
 }
 
-:host ::ng-deep .ant-layout-sider-collapsed .ant-menu-submenu-title:after {
+.ant-layout-sider-collapsed .ant-menu-submenu-title:after {
   display: none;
 }
 
-:host ::ng-deep .ant-layout-sider-collapsed .anticon {
+.ant-layout-sider-collapsed .anticon {
   font-size: 16px;
   margin-left: 8px;
 }
 
-:host ::ng-deep .trigger {
+ng-deep .trigger {
   font-size: 18px;
   line-height: 64px;
   padding: 0 16px;
@@ -26,7 +26,7 @@
   transition: color .3s;
 }
 
-:host ::ng-deep .trigger:hover {
+.trigger:hover {
   color: #108ee9;
 }
 

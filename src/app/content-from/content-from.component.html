@@ -5,7 +5,7 @@
 <nz-table #nzTable [nzDataSource]="_dataSet"
           [nzPageSize]="pagenum"
           [nzPageIndex]="1"
-          [nzTotal]="_dataSet.length"
+          [nzTotal]="dataTotal"
           (nzDataChange)="_displayDataChange($event)"
           (nzPageIndexChange)="_refreshStatus()"
           (nzPageSizeChange)="_refreshStatus()"

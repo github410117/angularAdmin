@@ -16,7 +16,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ChangeFormComponent implements OnInit {
 
-  // info: UserInfo;
+  info: Object;
 
 
   validateForm: FormGroup;
@@ -68,8 +68,14 @@ export class ChangeFormComponent implements OnInit {
 
   ngOnInit() {
     let uid = this.routerInfo.snapshot.params['id'];
-    let res = this.changeService.getinfo(uid);
-    console.log(res);
+    this.changeService.getinfo(uid).subscribe(res => {
+      this.validateForm = this.fb.group({
+        realName            : [ res['title'], [ Validators.required ] ],
+        phone               : [ res['content'], [ Validators.required  ] ],
+        nickName            : [ res['author'], [ Validators.required  ] ]
+      });
+    });
+
     // this.info = this.changeService.getinfo(uid);
     // console.log(this.info);
   }

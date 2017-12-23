@@ -10,17 +10,12 @@ export class ContentInfoService {
 
   public UserListURL = 'http://localhost:81/api/userinfo'
 
-  constructor(public http: Http) { }
+  constructor(public http: HttpClient) { }
 
   public getUserList():Observable<any>{
     console.log('来了');
     // TODO 查询HttpClient
-    return this.http.get('http://localhost:81/api/infos',null).map(res => res.json());
-      // .subscribe(ress => console.log(ress));
+    return this.http.get('http://localhost:81/api/infos');
   }
-// .map((res: Response) => {
-//   let result = res.json();
-//   return result;
-//   // return result;
-// })
+
 }
