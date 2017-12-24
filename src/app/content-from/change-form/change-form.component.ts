@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ContentChangeService} from '../service/content-change.service';
 import {
@@ -8,6 +8,8 @@ import {
   Validators
 } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import {NzModalService, NzModalSubject} from 'ng-zorro-antd';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'app-change-form',
@@ -16,8 +18,13 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ChangeFormComponent implements OnInit {
 
-  info: Object;
+  _id: string;
 
+  uid: Subject<string>;
+  content: string;
+  author: string;
+
+  renderData:any ={}
 
   validateForm: FormGroup;
   submitForm = ($event, value) => {
@@ -38,46 +45,36 @@ export class ChangeFormComponent implements OnInit {
 
 
 
-  userNameAsyncValidator = (control: FormControl): any => {
-    return Observable.create(function (observer) {
-      setTimeout(() => {
-        if (control.value === 'JasonWood') {
-          observer.next({ error: true, duplicated: true });
-        } else {
-          observer.next(null);
-        }
-        observer.complete();
-      }, 1000);
-    });
-  };
+  constructor(private modalService: NzModalService, private router: ActivatedRoute , private fb: FormBuilder, private infoService: ContentChangeService) {
 
-  getFormControl(name) {
-    return this.validateForm.controls[ name ];
   }
 
-
-
-
-  constructor(public routerInfo: ActivatedRoute, private changeService: ContentChangeService, private fb: FormBuilder) {
-    this.validateForm = this.fb.group({
-      realName            : [ '', [ Validators.required ] ],
-      phone               : [ '', [ Validators.required  ] ],
-      nickName            : [ '', [ Validators.required  ] ]
-    });
+  @Input()
+  set id(value: string) {
+    this._id = value;
   }
+
 
   ngOnInit() {
-    let uid = this.routerInfo.snapshot.params['id'];
-    this.changeService.getinfo(uid).subscribe(res => {
-      this.validateForm = this.fb.group({
-        realName            : [ res['title'], [ Validators.required ] ],
-        phone               : [ res['content'], [ Validators.required  ] ],
-        nickName            : [ res['author'], [ Validators.required  ] ]
-      });
+
+    this.validateForm = this.fb.group({
+      Uid                  : [ this.uid, [ Validators.required ] ],
+      Title                : [ this.renderData.title, [ Validators.required ] ],
+      Content              : [ this.renderData.content, [ Validators.required ] ],
+      Author               : [ this.renderData.author, [ Validators.required ] ],
+    });
+    this.infoService.getinfo(this._id).subscribe(res => {
+      this.renderData = res;
+      this.validateForm.setValue({
+        Content:"12315"
+      },{})
+      this.uid = res.id;
+        // this.content = res.content;
+        // this.author = res.
     });
 
-    // this.info = this.changeService.getinfo(uid);
-    // console.log(this.info);
   }
+
+
 
 }

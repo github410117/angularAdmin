@@ -13,7 +13,6 @@ export class ContentInfoService {
   constructor(public http: HttpClient) { }
 
   public getUserList():Observable<any>{
-    console.log('来了');
     // TODO 查询HttpClient
     return this.http.get('http://localhost:81/api/infos');
   }

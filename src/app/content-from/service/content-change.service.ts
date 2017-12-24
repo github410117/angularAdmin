@@ -9,9 +9,8 @@ export class ContentChangeService {
 
   constructor(private http: HttpClient) { }
 
-  getinfo(uid: string) {
+  getinfo(uid: string):Observable<any> {
      return this.http.get('http://localhost:81/api/infos/' + uid);
-     // return Observable.from('1234');
   }
 
 }

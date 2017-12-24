@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ContentChangeService} from './service/content-change.service';
 import {FormControl} from '@angular/forms';
 import {User} from './model/user-model';
 import {ContentInfoService} from './service/content-info.service';
+import {NzModalService} from 'ng-zorro-antd';
+import {ChangeFormComponent} from './change-form/change-form.component';
 
 @Component({
   selector: 'app-content-from',
@@ -21,7 +23,7 @@ export class ContentFromComponent implements OnInit {
   _indeterminate = false;
   tableLoading = true;
   pagenum = 10;
-  _dataSet =[];
+  _dataSet = [];
 
   dataTotal: number;
 
@@ -31,18 +33,17 @@ export class ContentFromComponent implements OnInit {
   // private userinfoArray: FormControl = new FormControl();
 
   _displayDataChange($event) {
-    console.log($event);
     this._displayData = $event;
   };
 
   _refreshStatus() {
-    alert('刷新了')
-    // const allChecked = this._displayData.every(value => value.checked === true);
-    // const allUnChecked = this._displayData.every(value => !value.checked);
-    // this._allChecked = allChecked;
-    // this._indeterminate = (!allChecked) && (!allUnChecked);
-    // this._disabledButton = !this._dataSet.some(value => value.checked);
-    // this._checkedNumber = this._dataSet.filter(value => value.checked).length;
+    alert('刷新了');
+    const allChecked = this._displayData.every(value => value.checked === true);
+    const allUnChecked = this._displayData.every(value => !value.checked);
+    this._allChecked = allChecked;
+    this._indeterminate = (!allChecked) && (!allUnChecked);
+    this._disabledButton = !this._dataSet.some(value => value.checked);
+    this._checkedNumber = this._dataSet.filter(value => value.checked).length;
   };
 
   _checkAll(value) {
@@ -65,14 +66,15 @@ export class ContentFromComponent implements OnInit {
 
   _columnData: Array<string>;
 
-  constructor(public router: Router, public activeRoute: ActivatedRoute, private contentchangeService: ContentChangeService, private contentservice: ContentInfoService) { }
+  constructor(private modalService: NzModalService, public router: Router, public activeRoute: ActivatedRoute, private contentchangeService: ContentChangeService, private contentservice: ContentInfoService) {
+  }
 
   ngOnInit() {
 
     // this._dataSet = this.contentService.getinfos();
     // this.contentService.userinfos.subscribe(success => this.userinfoArray = success);
 
-    this._columnData = ["Uid", "标题", "内容", "作者", "操作"];
+    this._columnData = ['Uid', '标题', '内容', '作者', '操作'];
 
     this.activeRoute.params.subscribe(() => this.loadData());
   }
@@ -81,22 +83,39 @@ export class ContentFromComponent implements OnInit {
     console.log('click dropdown button');
   }
 
-  public loadData(){
+  public loadData() {
     // this.contentservice.getUserList();
     this.contentservice.getUserList().subscribe(
       res => {
-        console.log(res);
         this._dataSet = res.data;
         this.tableLoading = false;
         this.dataTotal = res.total;
       },
-      error =>{console.log(error)},
-      ()=>{}
+      error => {
+        console.log(error);
+      },
+      () => {
+      }
     );
   }
 
-  edit(data:any) {
-    this.router.navigateByUrl('/content/' + data.id)
+  edit(data: any) {
+
+    this.modalService.open({
+      title: '编辑',
+      content: ChangeFormComponent,
+      onOk() {
+      },
+      onCancel() {
+        console.log('Click cancel');
+      },
+      footer: false,
+      componentParams: {
+        name: '测试渲染Component',
+        id: data.id,
+      }
+    });
+
   }
 
 
