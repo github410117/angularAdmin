@@ -7,9 +7,10 @@ import {
   FormControl,
   Validators
 } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import {NzModalService, NzModalSubject} from 'ng-zorro-antd';
+import {Observable} from 'rxjs/Observable';
+import {NzMessageService, NzModalService, NzModalSubject} from 'ng-zorro-antd';
 import {Subject} from 'rxjs/Subject';
+import {VariableAst} from '@angular/compiler';
 
 @Component({
   selector: 'app-change-form',
@@ -24,13 +25,13 @@ export class ChangeFormComponent implements OnInit {
   content: string;
   author: string;
 
-  renderData:any ={}
+  renderData: any;
 
   validateForm: FormGroup;
   submitForm = ($event, value) => {
     $event.preventDefault();
     for (const key in this.validateForm.controls) {
-      this.validateForm.controls[ key ].markAsDirty();
+      this.validateForm.controls[key].markAsDirty();
     }
     console.log(value);
   };
@@ -39,13 +40,12 @@ export class ChangeFormComponent implements OnInit {
     $event.preventDefault();
     this.validateForm.reset();
     for (const key in this.validateForm.controls) {
-      this.validateForm.controls[ key ].markAsPristine();
+      this.validateForm.controls[key].markAsPristine();
     }
   }
 
 
-
-  constructor(private modalService: NzModalService, private router: ActivatedRoute , private fb: FormBuilder, private infoService: ContentChangeService) {
+  constructor(private modalService: NzModalService, private router: ActivatedRoute, private fb: FormBuilder, private infoService: ContentChangeService,private message:NzMessageService) {
 
   }
 
@@ -57,24 +57,25 @@ export class ChangeFormComponent implements OnInit {
 
   ngOnInit() {
 
+
     this.validateForm = this.fb.group({
-      Uid                  : [ this.uid, [ Validators.required ] ],
-      Title                : [ this.renderData.title, [ Validators.required ] ],
-      Content              : [ this.renderData.content, [ Validators.required ] ],
-      Author               : [ this.renderData.author, [ Validators.required ] ],
+      Uid: [this.content, [Validators.required]],
+      Title: ['', [Validators.required]],
+      Content: ['', [Validators.required]],
+      Author: ['', [Validators.required]],
     });
+    this.uid.subscribe(re => this.content = re);
     this.infoService.getinfo(this._id).subscribe(res => {
       this.renderData = res;
-      this.validateForm.setValue({
-        Content:"12315"
-      },{})
-      this.uid = res.id;
-        // this.content = res.content;
-        // this.author = res.
+    this.uid = res.id;
+      // this.content = res.content;
+      // this.author = res.
     });
 
   }
 
-
+  submint(){
+    this.message.create("warning","feifashuju")
+  }
 
 }
