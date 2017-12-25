@@ -21,6 +21,8 @@ export class ChangeFormComponent implements OnInit {
 
   _id: string;
 
+  _data: any;
+
   uid: Subject<string>;
   content: string;
   author: string;
@@ -33,7 +35,7 @@ export class ChangeFormComponent implements OnInit {
     for (const key in this.validateForm.controls) {
       this.validateForm.controls[key].markAsDirty();
     }
-    console.log(value);
+    this.subject.next(value);
   };
 
   resetForm($event: MouseEvent) {
@@ -45,37 +47,34 @@ export class ChangeFormComponent implements OnInit {
   }
 
 
-  constructor(private modalService: NzModalService, private router: ActivatedRoute, private fb: FormBuilder, private infoService: ContentChangeService,private message:NzMessageService) {
+  constructor(private modalService: NzModalService,
+              private router: ActivatedRoute,
+              private fb: FormBuilder,
+              private infoService: ContentChangeService,
+              private message: NzMessageService,
+              private subject: NzModalSubject) {
 
   }
 
   @Input()
-  set id(value: string) {
-    this._id = value;
+  set data(value: string) {
+    this._data = value;
   }
 
 
   ngOnInit() {
-
-
     this.validateForm = this.fb.group({
-      Uid: [this.content, [Validators.required]],
-      Title: ['', [Validators.required]],
-      Content: ['', [Validators.required]],
-      Author: ['', [Validators.required]],
+      Uid: [this._data.id, [Validators.required]],
+      Title: [this._data.title, [Validators.required]],
+      Content: [this._data.content, [Validators.required]],
+      Author: [this._data.author, [Validators.required]],
     });
-    this.uid.subscribe(re => this.content = re);
-    this.infoService.getinfo(this._id).subscribe(res => {
-      this.renderData = res;
-    this.uid = res.id;
-      // this.content = res.content;
-      // this.author = res.
-    });
+
 
   }
 
-  submint(){
-    this.message.create("warning","feifashuju")
+  submint() {
+    this.message.create('warning', 'feifashuju');
   }
 
 }

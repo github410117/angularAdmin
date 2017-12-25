@@ -5,7 +5,7 @@
       <label nz-form-item-required>Uid</label>
     </div>
     <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-      <nz-input formControlName="Uid" [nzType]="'text'" [nzPlaceHolder]="'async validate try to write JasonWood'" [nzSize]="'large'">
+      <nz-input nzDisabled="true" formControlName="Uid" [nzType]="'text'" [nzPlaceHolder]="'async validate try to write JasonWood'" [nzSize]="'large'">
       </nz-input>
       <!--<div nz-form-explain *ngIf="getFormControl('Uid').dirty&&getFormControl('Uid').hasError('required')">Please input your Uid!</div>-->
       <!--<div nz-form-explain *ngIf="getFormControl('Uid').dirty&&getFormControl('Uid').pending">Validating...</div>-->

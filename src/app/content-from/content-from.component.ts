@@ -4,8 +4,9 @@ import {ContentChangeService} from './service/content-change.service';
 import {FormControl} from '@angular/forms';
 import {User} from './model/user-model';
 import {ContentInfoService} from './service/content-info.service';
-import {NzModalService} from 'ng-zorro-antd';
+import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {ChangeFormComponent} from './change-form/change-form.component';
+import {isObject} from 'util';
 
 @Component({
   selector: 'app-content-from',
@@ -66,7 +67,14 @@ export class ContentFromComponent implements OnInit {
 
   _columnData: Array<string>;
 
-  constructor(private modalService: NzModalService, public router: Router, public activeRoute: ActivatedRoute, private contentchangeService: ContentChangeService, private contentservice: ContentInfoService) {
+  constructor(
+    private modalService: NzModalService,
+    public router: Router,
+    public activeRoute: ActivatedRoute,
+    private contentchangeService: ContentChangeService,
+    private contentservice: ContentInfoService,
+    private message: NzMessageService,
+  ) {
   }
 
   ngOnInit() {
@@ -100,21 +108,40 @@ export class ContentFromComponent implements OnInit {
   }
 
   edit(data: any) {
+    // this.contentchangeService.updateinfo(data.id, data);
+    this.tableLoading = true;
+    this.contentchangeService.getinfo(data.id).subscribe(res => {
+      this.tableLoading = false;
+      const subscription = this.modalService.open({
+        title: '编辑',
+        content: ChangeFormComponent,
+        onOk() {
 
-    this.modalService.open({
-      title: '编辑',
-      content: ChangeFormComponent,
-      onOk() {
-      },
-      onCancel() {
-        console.log('Click cancel');
-      },
-      footer: false,
-      componentParams: {
-        name: '测试渲染Component',
-        id: data.id,
-      }
-    });
+        },
+        onCancel() {
+          console.log('Click cancel');
+        },
+        footer: false,
+        componentParams: {
+          data: res
+        }
+      });
+
+      subscription.subscribe(result => {
+        if (!isObject(result)){return;}
+
+        this.contentchangeService.updateinfo(result['Uid'], result).subscribe(res => {
+            if (res != '1') {
+              this.message.create('error','错误了');
+            }else {
+              subscription.destroy('onOk');
+              this.message.create('success','修改成功');
+              this.loadData();
+            }
+
+        });
+      });
+    })
 
   }
 

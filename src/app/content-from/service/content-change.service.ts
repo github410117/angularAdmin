@@ -13,6 +13,10 @@ export class ContentChangeService {
      return this.http.get('http://localhost:81/api/infos/' + uid);
   }
 
+  updateinfo(uid: string, infoParam: any){
+    return this.http.put('http://localhost:81/api/infos/' + uid, infoParam);
+  }
+
 }
 
 
