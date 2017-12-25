@@ -108,39 +108,39 @@ export class ContentFromComponent implements OnInit {
   }
 
   edit(data: any) {
-    // this.contentchangeService.updateinfo(data.id, data);
+    let that = this;
     this.tableLoading = true;
     this.contentchangeService.getinfo(data.id).subscribe(res => {
-      this.tableLoading = false;
-      const subscription = this.modalService.open({
-        title: '编辑',
-        content: ChangeFormComponent,
-        onOk() {
-
-        },
-        onCancel() {
-          console.log('Click cancel');
-        },
-        footer: false,
-        componentParams: {
-          data: res
-        }
-      });
-
-      subscription.subscribe(result => {
-        if (!isObject(result)){return;}
-
-        this.contentchangeService.updateinfo(result['Uid'], result).subscribe(res => {
-            if (res != '1') {
-              this.message.create('error','错误了');
-            }else {
-              subscription.destroy('onOk');
-              this.message.create('success','修改成功');
-              this.loadData();
-            }
-
+        this.tableLoading = false;
+        const subscription = this.modalService.open({
+          title: '编辑',
+          content: ChangeFormComponent,
+          onOk() {
+            that.loadData();
+          },
+          onCancel() {
+            console.log('Click cancel');
+          },
+          footer: false,
+          componentParams: {
+            data: res
+          }
         });
-      });
+
+      // subscription.subscribe(result => {
+      //   if (!isObject(result)){return;}
+      //
+      //   this.contentchangeService.updateinfo(result['Uid'], result).subscribe(res => {
+      //       if (res != '1') {
+      //         this.message.create('error','错误了');
+      //       }else {
+      //         subscription.destroy('onOk');
+      //         this.message.create('success','修改成功');
+      //         this.loadData();
+      //       }
+      //
+      //   });
+      // });
     })
 
   }

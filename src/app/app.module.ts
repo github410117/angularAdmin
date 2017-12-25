@@ -14,6 +14,7 @@ import { ContentChangeService } from './content-from/service/content-change.serv
 import {HttpClientModule} from '@angular/common/http';
 import {ContentInfoService} from './content-from/service/content-info.service';
 import {environment} from '../environments/environment';
+import { LoginComponent } from './login/login.component';
 
 const API_URL = environment.apiUrl;
 
@@ -26,7 +27,8 @@ const API_URL = environment.apiUrl;
     AppComponent,
     SiderComponent,
     ContentFromComponent,
-    ChangeFormComponent
+    ChangeFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

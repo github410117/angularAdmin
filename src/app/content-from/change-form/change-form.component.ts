@@ -19,32 +19,15 @@ import {VariableAst} from '@angular/compiler';
 })
 export class ChangeFormComponent implements OnInit {
 
-  _id: string;
-
   _data: any;
 
-  uid: Subject<string>;
   content: string;
   author: string;
 
-  renderData: any;
 
   validateForm: FormGroup;
-  submitForm = ($event, value) => {
-    $event.preventDefault();
-    for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsDirty();
-    }
-    this.subject.next(value);
-  };
 
-  resetForm($event: MouseEvent) {
-    $event.preventDefault();
-    this.validateForm.reset();
-    for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsPristine();
-    }
-  }
+  sendLoading: boolean = false;
 
 
   constructor(private modalService: NzModalService,
@@ -52,7 +35,9 @@ export class ChangeFormComponent implements OnInit {
               private fb: FormBuilder,
               private infoService: ContentChangeService,
               private message: NzMessageService,
-              private subject: NzModalSubject) {
+              private subject: NzModalSubject,
+              private changeService: ContentChangeService,
+              ) {
 
   }
 
@@ -73,8 +58,32 @@ export class ChangeFormComponent implements OnInit {
 
   }
 
-  submint() {
-    this.message.create('warning', 'feifashuju');
+
+  submitForm(value) {
+    // $event.preventDefault();
+    // for (const key in this.validateForm.controls) {
+    //   this.validateForm.controls[key].markAsDirty();
+    // }
+    // this.subject.next(value);
+
+    this.sendLoading = true;
+    this.changeService.updateinfo(value.Uid, value).subscribe(res => {
+      this.sendLoading = false;
+      if (res !== '1') {
+        this.message.create('success','修改成功');
+        this.subject.destroy('onOk')
+      }else {
+        this.message.create('error','修改失败');
+      }
+    });
+  };
+
+  resetForm($event: MouseEvent) {
+    $event.preventDefault();
+    this.validateForm.reset();
+    for (const key in this.validateForm.controls) {
+      this.validateForm.controls[key].markAsPristine();
+    }
   }
 
 }

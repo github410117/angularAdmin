@@ -6,6 +6,7 @@
           [nzPageSize]="pagenum"
           [nzPageIndex]="1"
           [nzTotal]="dataTotal"
+          nzSize="small"
           (nzDataChange)="_displayDataChange($event)"
           (nzPageIndexChange)="_refreshStatus()"
           (nzPageSizeChange)="_refreshStatus()"
@@ -39,25 +40,23 @@
     <!--<td nz-td>{{data.role}}</td>-->
     <!--<td nz-td>{{data.registerTime}}</td>-->
     <td nz-td>
-      <div style="height: 28px; text-align: center" >
-        <nz-dropdown-button style="float: none">
-          操作
-          <ul nz-menu>
-            <li nz-menu-item>
-              <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">设置代理商</a>
-            </li>
-            <li nz-menu-item>
-              <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">设置角色</a>
-            </li>
-            <li nz-menu-item>
-              <a rel="noopener noreferrer" (click)="edit(data)">编辑</a>
-            </li>
-            <li nz-menu-item>
-              <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">重设密码</a>
-            </li>
-          </ul>
-        </nz-dropdown-button>
-      </div>
+      <nz-dropdown-button  style="float: none;" nzSize="small">
+        操作
+        <ul nz-menu>
+          <li nz-menu-item>
+            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">设置代理商</a>
+          </li>
+          <li nz-menu-item>
+            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">设置角色</a>
+          </li>
+          <li nz-menu-item>
+            <a rel="noopener noreferrer" (click)="edit(data)">编辑</a>
+          </li>
+          <li nz-menu-item>
+            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">重设密码</a>
+          </li>
+        </ul>
+      </nz-dropdown-button>
     </td>
   </tr>
   </tbody>
