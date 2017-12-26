@@ -15,6 +15,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {ContentInfoService} from './content-from/service/content-info.service';
 import {environment} from '../environments/environment';
 import { LoginComponent } from './login/login.component';
+import { ApiCoreServiceService } from './core-service/api-core-service.service';
 
 const API_URL = environment.apiUrl;
 
@@ -41,6 +42,6 @@ const API_URL = environment.apiUrl;
     RoutesModule,
   ],
   bootstrap: [AppComponent],
-  providers: [ContentChangeService, ContentInfoService]
+  providers: [ContentChangeService, ContentInfoService, ApiCoreServiceService]
 })
 export class AppModule { }
