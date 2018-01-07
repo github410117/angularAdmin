@@ -16,12 +16,9 @@ import {ContentInfoService} from './content-from/service/content-info.service';
 import {environment} from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import { ApiCoreServiceService } from './core-service/api-core-service.service';
+import { HomeComponent } from './home/home.component';
+import {loginGuard} from './guard/login.guard';
 
-const API_URL = environment.apiUrl;
-
-// const routeConfig: Router = [
-//   {path: '', component: ContentFromComponent}
-// ];
 
 @NgModule({
   declarations: [
@@ -29,12 +26,12 @@ const API_URL = environment.apiUrl;
     SiderComponent,
     ContentFromComponent,
     ChangeFormComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -42,6 +39,6 @@ const API_URL = environment.apiUrl;
     RoutesModule,
   ],
   bootstrap: [AppComponent],
-  providers: [ContentChangeService, ContentInfoService, ApiCoreServiceService]
+  providers: [ContentChangeService, ContentInfoService, ApiCoreServiceService, loginGuard]
 })
 export class AppModule { }
